@@ -1,0 +1,18 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: eureka
+#  cloud:
+#    config:
+#      label: master # 仓库的分支
+#      profile: dev # dev：开发环境配置文件 test：测试环境 pro：正式环境
+#      uri: http://localhost:8087 # 配置服务中心服务地址
+eureka:
+  instance:
+    hostname: loclhost
+  client:
+    register-with-eureka: false #用来表明自己是一个eureka server
+    fetch-registry: false #用来表明自己是一个eureka server
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/ # 注册中心地址

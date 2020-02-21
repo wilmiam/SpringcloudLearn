@@ -1,0 +1,9 @@
+rootProject.name = 'wilmiam_cloud'
+include 'config'
+include 'eureka'
+include 'gateway'
+include 'ribbon'
+include 'hi-service'
+include 'feign'
+include 'zuul'
+

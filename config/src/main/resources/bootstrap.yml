@@ -1,0 +1,18 @@
+server:
+  port: 8087
+spring:
+  application:
+    name: config
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/wilmiam/SpringcloudConfig # git仓库地址
+          search-paths: respo # 仓库路径
+          username:  # git账号 公开仓库不需要账号密码
+          password:  # git密码 公开仓库不需要账号密码
+#      label: master # 仓库的分支 可以在客户端配置，测试这里设置分支客户端不起作用
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8081/eureka/

@@ -1,0 +1,17 @@
+server:
+  port: 8084
+spring:
+  application:
+    name: ribbon
+  cloud:
+    config:
+      label: master # 仓库的分支 不设置默认master
+      profile: dev # dev：开发环境配置文件 test：测试环境 pro：正式环境
+#      uri: http://localhost:8087 # 配置服务中心服务地址
+      discovery:
+        enabled: true # 从配置中心读取文件
+        serviceId: config # 服务名(application.name)
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8081/eureka/

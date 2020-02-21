@@ -1,0 +1,12 @@
+group 'com.wilmiam'
+version '1.0-SNAPSHOT'
+
+dependencies {
+    implementation "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+    implementation "org.springframework.cloud:spring-cloud-starter-config:${springCloudVersion}"
+    implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:${springCloudVersion}") {
+        exclude group: 'com.google.code.gson'
+    }
+    implementation "org.springframework.cloud:spring-cloud-starter-openfeign:${springCloudVersion}"
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}

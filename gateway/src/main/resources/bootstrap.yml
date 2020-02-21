@@ -1,0 +1,48 @@
+server:
+  port: 8088
+
+spring:
+  application:
+    name: gateway
+  cloud:
+    config:
+      label: master # 仓库的分支 不设置默认master
+      profile: dev # dev：开发环境配置文件 test：测试环境 pro：正式环境
+      uri: http://localhost:8087 # 配置服务中心服务地址
+    gateway:
+      discovery:
+        locator:
+          enabled: true # 开启服务注册和发现功能，自动匹配请求到对应的服务，如：http://localhost:8080/hi-service/hi，自动转发到hi-service服务
+          lowerCaseServiceId: true # 将请求路径上的服务名配置为小写
+      # 可以自动匹配也可以手动匹配
+      routes:
+        - id:  feign-server
+          uri: lb://feign # lb代表从注册中心获取服务
+          predicates:
+            - Path=/admin/** # 转发匹配该路径的请求
+          filters:
+            - StripPrefix=1 # 表示从二级url路径转发，即http://localhost:port/admin/test将会转发到http://{activity}/test
+        - id:  ribbon-server
+          uri: lb://ribbon # lb代表从注册中心获取服务
+          predicates:
+            - Path=/user/** # 转发匹配该路径的请求
+          filters:
+            - StripPrefix=1 # 表示从二级url路径转发，即http://localhost:port/user/test将会转发到http://{activity}/test
+        - id:  hi-server
+          uri: lb://hi-service # lb代表从注册中心获取服务
+          predicates:
+            - Path=/hi/** # 转发匹配该路径的请求
+          filters:
+            - StripPrefix=1
+        # 自定义指定路由过滤器 RequestTimeGatewayFilterFactory
+        - id: elapse_route
+          uri: https://fanyi.baidu.com/
+          predicates:
+            - After=2018-03-18T17:32:58.129+08:00[Asia/Shanghai]
+          filters:
+            - RequestTime=true # 这个参数会传给内部类Config
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8081/eureka/

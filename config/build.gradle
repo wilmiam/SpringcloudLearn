@@ -1,0 +1,10 @@
+group 'com.example'
+version '1.0-SNAPSHOT'
+
+dependencies {
+//    implementation "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+    implementation "org.springframework.cloud:spring-cloud-config-server:${springCloudVersion}"
+    implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:${springCloudVersion}") {
+        exclude group: 'com.google.code.gson'
+    }
+}
