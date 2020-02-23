@@ -8,11 +8,12 @@ group 'com.wilmiam'
 version '1.0-SNAPSHOT'
 
 subprojects{
+    // apply plugin 在这里是应用到子模块，如果没有子模块，新的写法不需要写这个
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
     apply plugin: 'java'
-    apply plugin: 'java-library'
-    apply plugin: 'maven'
+//    apply plugin: 'java-library'
+//    apply plugin: 'maven'
 
     sourceCompatibility = 11
 
@@ -29,7 +30,8 @@ subprojects{
     }
 
     dependencies {
-        testImplementation("org.springframework.boot:spring-boot-starter-test:${springBootVersion}") {
+        // 这里会使用上面plugins中的springboot版本
+        testImplementation("org.springframework.boot:spring-boot-starter-test") {
             exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
         }
     }
